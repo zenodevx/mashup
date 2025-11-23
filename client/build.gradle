@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'com.linecorp.thrift-gradle-plugin' version '0.6.1'
+    id 'com.gradleup.shadow' version '8.3.2'
+}
+
+dependencies {
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation 'org.slf4j:slf4j-reload4j:2.0.16'
+    implementation 'org.apache.thrift:libthrift:0.22.0'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.4'
+    implementation group: 'org.apache.httpcomponents.client5', name: 'httpclient5-fluent', version: '5.2.1'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+compileThrift {
+    sourceDir "$projectDir/src/main/thrift"
+    outputDir "$projectDir/generated/java/"
+    strict true
+    verbose true
+    recurse true
+    createGenFolder false
+    generator 'java', 'private-members'
+}
+sourceSets.main.java.srcDirs += ['$projectDir/generated/java']
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.example.client.Main'
+    }
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'org.example.client.Main'
+    }
+}

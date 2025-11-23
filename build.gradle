@@ -1,0 +1,27 @@
+plugins {
+    id 'org.gretty' version '4.1.4'
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+dependencies {
+    implementation 'org.gretty:gretty:+'
+}
+
+farm {
+    webapp ':virtualcrm'
+    webapp ':internalcrm'
+
+    gretty {
+        httpPort = project.hasProperty("httpPort") ? project.httpPort as int : 8080
+        contextPath = '/'
+    }
+}
+
+project.afterEvaluate {
+    tasks.farmRun.dependsOn ':client:shadowJar'
+}
