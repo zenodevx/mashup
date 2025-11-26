@@ -30,11 +30,6 @@ public class InternalCrmServiceServlet extends HttpServlet {
         processRequest(req, resp);
     }
 
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        processRequest(req, resp);
-    }
-
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             resp.setContentType("application/x-thrift");
