@@ -1,5 +1,6 @@
 package fr.univangers.mashup.internalcrm;
 
+import fr.univangers.mashup.internalcrm.service.InternalCrmServiceImpl;
 import fr.univangers.mashup.internalcrm.thrift.InternalCrmService;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

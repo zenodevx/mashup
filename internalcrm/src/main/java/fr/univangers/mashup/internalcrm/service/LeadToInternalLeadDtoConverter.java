@@ -1,4 +1,4 @@
-package fr.univangers.mashup.internalcrm;
+package fr.univangers.mashup.internalcrm.service;
 
 import fr.univangers.mashup.internalcrm.model.InternalLead;
 import fr.univangers.mashup.internalcrm.thrift.InternalLeadDto;

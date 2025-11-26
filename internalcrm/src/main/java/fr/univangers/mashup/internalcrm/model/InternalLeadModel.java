@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class InternalLeadService {
+public class InternalLeadModel {
     private final List<InternalLead> leads = new ArrayList<>();
 
     public List<InternalLead> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) {

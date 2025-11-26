@@ -1,18 +1,18 @@
-package fr.univangers.mashup.internalcrm;
+package fr.univangers.mashup.internalcrm.service;
 
 import fr.univangers.mashup.internalcrm.model.InternalLead;
-import fr.univangers.mashup.internalcrm.model.InternalLeadService;
+import fr.univangers.mashup.internalcrm.model.InternalLeadModel;
 import fr.univangers.mashup.internalcrm.thrift.InternalCrmService;
 import fr.univangers.mashup.internalcrm.thrift.InternalLeadDto;
 
 import java.util.Calendar;
 import java.util.List;
 
-import static fr.univangers.mashup.internalcrm.LeadToInternalLeadDtoConverter.toInternalLead;
-import static fr.univangers.mashup.internalcrm.LeadToInternalLeadDtoConverter.toInternalLeadDtos;
+import static fr.univangers.mashup.internalcrm.service.LeadToInternalLeadDtoConverter.toInternalLead;
+import static fr.univangers.mashup.internalcrm.service.LeadToInternalLeadDtoConverter.toInternalLeadDtos;
 
 public class InternalCrmServiceImpl implements InternalCrmService.Iface {
-    private final InternalLeadService leadService = new InternalLeadService();
+    private final InternalLeadModel leadService = new InternalLeadModel();
 
     @Override
     public List<InternalLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) {
