@@ -1,13 +1,11 @@
-package fr.univangers.movies;
+package fr.univangers.mashup.virtualcrm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Movies {
-
+public class VirtualCrmApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Movies.class, args);
+        SpringApplication.run(VirtualCrmApplication.class, args);
     }
 }
-

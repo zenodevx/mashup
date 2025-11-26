@@ -13,11 +13,6 @@ dependencies {
     implementation 'org.slf4j:slf4j-reload4j:2.0.17'
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
 final String THRIFT_GENERATED_DIR = "$projectDir/generated"
 
 compileThrift {
@@ -32,7 +27,7 @@ compileThrift {
 
 sourceSets.main.java.srcDirs += [compileThrift.outputDir]
 
-clean {
+tasks.named('clean') {
     delete file(THRIFT_GENERATED_DIR)
 }
 
