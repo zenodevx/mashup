@@ -1,6 +1,7 @@
 package fr.masterinfo.internalcrm.model;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class InternalLead {
@@ -119,5 +120,34 @@ public class InternalLead {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        InternalLead that = (InternalLead) o;
+        return Double.compare(annualRevenue, that.annualRevenue) == 0 && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(phone, that.phone) && Objects.equals(street, that.street) && Objects.equals(postalCode, that.postalCode) && Objects.equals(city, that.city) && Objects.equals(country, that.country) && Objects.equals(creationDate, that.creationDate) && Objects.equals(company, that.company) && Objects.equals(state, that.state);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, annualRevenue, phone, street, postalCode, city, country, creationDate, company, state);
+    }
+
+    @Override
+    public String toString() {
+        return "InternalLead{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", annualRevenue=" + annualRevenue +
+                ", phone='" + phone + '\'' +
+                ", street='" + street + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", creationDate=" + creationDate +
+                ", company='" + company + '\'' +
+                ", state='" + state + '\'' +
+                '}';
     }
 }

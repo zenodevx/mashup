@@ -16,8 +16,18 @@ public class Client {
         var client = getClient();
         try (TTransport transport = client.getInputProtocol().getTransport()) {
             transport.open();
-            client.addLead(new InternalLeadDto("A, B", 1000, "0102030405", "str", "49000", "angers", "france", Calendar.getInstance().getTimeInMillis(), "comp", "state"));
-            System.out.println(client.findLeads(1000, 1000, "state"));
+
+            InternalLeadDto leadDto = new InternalLeadDto("LastName, FirstName", 100, "0612452356", "street", "49000", "Angers", "France", Calendar.getInstance().getTimeInMillis(), "Company", "State");
+            client.addLead(leadDto);
+            System.out.println("Add lead: " + leadDto);
+
+            InternalLeadDto foundLeadDto = client.findLeads(0, 1_000, "State").getFirst();
+            System.out.println("Found lead: " + foundLeadDto);
+
+            client.deleteLead(foundLeadDto);
+            System.out.println("Delete lead: " + foundLeadDto);
+
+            System.out.println("Leads: " + client.findLeads(0, 1_000, "State"));
         } catch (TException e) {
             throw new RuntimeException(e);
         }
