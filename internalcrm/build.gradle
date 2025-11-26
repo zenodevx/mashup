@@ -21,11 +21,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-final String THRIFT_OUTPUT_DIR = "$rootDir/generated-thrift/java"
+final String THRIFT_GENERATED_DIR = "$projectDir/generated"
 
 compileThrift {
-    delete file(THRIFT_OUTPUT_DIR)
-    outputDir THRIFT_OUTPUT_DIR
+    delete file(THRIFT_GENERATED_DIR)
+    outputDir "$THRIFT_GENERATED_DIR/java"
     createGenFolder false
     strict true
     verbose true
@@ -33,10 +33,10 @@ compileThrift {
     generator 'java', 'private_members', 'fullcamel', 'jakarta_annotations'
 }
 
-sourceSets.main.java.srcDirs += [THRIFT_OUTPUT_DIR]
+sourceSets.main.java.srcDirs += [compileThrift.outputDir]
 
 clean {
-    delete file("$rootDir/generated-thrift")
+    delete file(THRIFT_GENERATED_DIR)
 }
 
 farm {
