@@ -1,3 +1,2 @@
 rootProject.name = 'mashup'
-include("client", "virtualcrm", "internalcrm")
-
+include 'client', 'internalcrm'//, 'virtualcrm'

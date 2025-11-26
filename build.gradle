@@ -1,6 +1,6 @@
-plugins {
-    id 'org.gretty' version '4.1.4'
-}
+//plugins {
+//    id 'org.gretty' version '4.1.4'
+//}
 
 allprojects {
     repositories {
@@ -8,20 +8,20 @@ allprojects {
     }
 }
 
-dependencies {
-    implementation 'org.gretty:gretty:+'
-}
+//dependencies {
+//    implementation 'org.gretty:gretty:+'
+//}
 
-farm {
-    webapp ':virtualcrm'
-    webapp ':internalcrm'
+//farm {
+//    webapp ':virtualcrm'
+//    webapp ':internalcrm'
+//
+//    gretty {
+//        httpPort = project.hasProperty("httpPort") ? project.httpPort as int : 8080
+//        contextPath = '/'
+//    }
+//}
 
-    gretty {
-        httpPort = project.hasProperty("httpPort") ? project.httpPort as int : 8080
-        contextPath = '/'
-    }
-}
-
-project.afterEvaluate {
-    tasks.farmRun.dependsOn ':client:shadowJar'
-}
+//project.afterEvaluate {
+//    tasks.farmRun.dependsOn ':client:shadowJar'
+//}
