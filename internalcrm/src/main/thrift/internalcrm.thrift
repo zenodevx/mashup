@@ -1,4 +1,4 @@
-namespace java fr.masterinfo.internalcrm.thrift
+namespace java fr.univangers.mashup.internalcrm.thrift
 
 struct InternalLeadDto {
      1: string name

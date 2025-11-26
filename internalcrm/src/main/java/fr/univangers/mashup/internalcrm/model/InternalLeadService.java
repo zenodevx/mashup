@@ -1,4 +1,4 @@
-package fr.masterinfo.internalcrm.model;
+package fr.univangers.mashup.internalcrm.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;

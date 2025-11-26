@@ -37,5 +37,5 @@ clean {
 }
 
 application {
-    mainClass = 'fr.masterinfo.client.Client'
+    mainClass = 'fr.univangers.mashup.client.Client'
 }

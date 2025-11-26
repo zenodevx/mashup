@@ -1,7 +1,7 @@
-package fr.masterinfo.internalcrm;
+package fr.univangers.mashup.internalcrm;
 
-import fr.masterinfo.internalcrm.model.InternalLead;
-import fr.masterinfo.internalcrm.thrift.InternalLeadDto;
+import fr.univangers.mashup.internalcrm.model.InternalLead;
+import fr.univangers.mashup.internalcrm.thrift.InternalLeadDto;
 
 import java.util.Calendar;
 import java.util.List;

@@ -1,6 +1,6 @@
-package fr.masterinfo.internalcrm;
+package fr.univangers.mashup.internalcrm;
 
-import fr.masterinfo.internalcrm.thrift.InternalCrmService;
+import fr.univangers.mashup.internalcrm.thrift.InternalCrmService;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

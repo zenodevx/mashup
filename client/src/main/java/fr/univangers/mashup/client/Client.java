@@ -1,7 +1,7 @@
-package fr.masterinfo.client;
+package fr.univangers.mashup.client;
 
-import fr.masterinfo.internalcrm.thrift.InternalCrmService;
-import fr.masterinfo.internalcrm.thrift.InternalLeadDto;
+import fr.univangers.mashup.internalcrm.thrift.InternalCrmService;
+import fr.univangers.mashup.internalcrm.thrift.InternalLeadDto;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -21,7 +21,7 @@ public class Client {
             client.addLead(leadDto);
             System.out.println("Add lead: " + leadDto);
 
-            InternalLeadDto foundLeadDto = client.findLeads(0, 1_000, "State").getFirst();
+            InternalLeadDto foundLeadDto = client.findLeads(0, 1_000, "State").get(0);
             System.out.println("Found lead: " + foundLeadDto);
 
             client.deleteLead(foundLeadDto);
