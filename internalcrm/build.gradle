@@ -24,7 +24,6 @@ java {
 final String THRIFT_GENERATED_DIR = "$projectDir/generated"
 
 compileThrift {
-    delete file(THRIFT_GENERATED_DIR)
     outputDir "$THRIFT_GENERATED_DIR/java"
     createGenFolder false
     strict true
