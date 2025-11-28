@@ -14,8 +14,8 @@ struct InternalLeadDto {
 }
 
 exception InvalidAnnualRevenueArgument {
-       1: string lowAnnualRevenue
-       2: string highAnnualRevenue
+       1: double lowAnnualRevenue
+       2: double highAnnualRevenue
 }
 
 exception InvalidDateFormatException {

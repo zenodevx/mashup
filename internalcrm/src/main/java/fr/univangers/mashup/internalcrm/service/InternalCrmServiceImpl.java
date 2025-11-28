@@ -1,8 +1,6 @@
 package fr.univangers.mashup.internalcrm.service;
 
-import fr.univangers.mashup.internalcrm.thrift.InternalCrmService;
-import fr.univangers.mashup.internalcrm.thrift.InternalLeadDto;
-import fr.univangers.mashup.internalcrm.thrift.InvalidDateFormatException;
+import fr.univangers.mashup.internalcrm.thrift.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +16,10 @@ public class InternalCrmServiceImpl implements InternalCrmService.Iface {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
 
     @Override
-    public List<InternalLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) {
+    public List<InternalLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) throws InvalidAnnualRevenueArgument {
+        if (lowAnnualRevenue > highAnnualRevenue) {
+            throw new InvalidAnnualRevenueArgument(lowAnnualRevenue, highAnnualRevenue);
+        }
         return toInternalLeadDtos(getModel().findLeads(lowAnnualRevenue, highAnnualRevenue, state));
     }
 
@@ -47,7 +48,9 @@ public class InternalCrmServiceImpl implements InternalCrmService.Iface {
     }
 
     @Override
-    public void deleteLead(InternalLeadDto leadDto) throws InvalidDateFormatException {
-        getModel().deleteLead(toLead(leadDto));
+    public void deleteLead(InternalLeadDto leadDto) throws InvalidDateFormatException, LeadNotFoundException {
+        if (!getModel().deleteLead(toLead(leadDto))) {
+            throw new LeadNotFoundException(leadDto);
+        }
     }
 }
