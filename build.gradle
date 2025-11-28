@@ -1,5 +1,5 @@
 plugins {
-    id 'org.gretty' version '4.1.4'
+    id 'org.gretty' version '4.1.10'
 }
 
 allprojects {
@@ -8,20 +8,23 @@ allprojects {
     }
 }
 
-dependencies {
-    implementation 'org.gretty:gretty:+'
-}
-
-farm {
-    webapp ':virtualcrm'
-    webapp ':internalcrm'
-
-    gretty {
-        httpPort = project.hasProperty("httpPort") ? project.httpPort as int : 8080
-        contextPath = '/'
+subprojects {
+    plugins.withType(JavaPlugin).tap {
+        configureEach {
+            java {
+                toolchain {
+                    languageVersion = JavaLanguageVersion.of(21)
+                }
+            }
+        }
     }
 }
 
-project.afterEvaluate {
-    tasks.farmRun.dependsOn ':client:shadowJar'
+gretty {
+    servletContainer = 'tomcat10'
+}
+
+farm {
+    webapp ':internalcrm'
+    webapp ':virtualcrm'
 }
