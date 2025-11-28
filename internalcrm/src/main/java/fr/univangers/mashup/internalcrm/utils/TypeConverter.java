@@ -1,20 +1,20 @@
-package fr.univangers.mashup.internalcrm.service;
+package fr.univangers.mashup.internalcrm.utils;
 
-import fr.univangers.mashup.internalcrm.model.InternalLead;
+import fr.univangers.mashup.internalcrm.model.Lead;
 import fr.univangers.mashup.internalcrm.thrift.InternalLeadDto;
+import fr.univangers.mashup.internalcrm.thrift.InvalidDateFormatException;
 
 import java.util.Calendar;
 import java.util.List;
 
-public class LeadToInternalLeadDtoConverter {
-    public static InternalLead toInternalLead(InternalLeadDto leadDto) {
+public class TypeConverter {
+    public static Lead toLead(InternalLeadDto leadDto) throws InvalidDateFormatException {
         String[] split = leadDto.getName().split(", ");
-        String lastName = split[0];
         String firstName = split[1];
-        Calendar creationDate = Calendar.getInstance();
-        creationDate.setTimeInMillis(leadDto.getCreationDateTimestamp());
+        String lastName = split[0];
+        Calendar creationDate = DateUtils.parse(leadDto.getCreationDate());
 
-        return new InternalLead(
+        return new Lead(
                 firstName,
                 lastName,
                 leadDto.getAnnualRevenue(),
@@ -29,9 +29,9 @@ public class LeadToInternalLeadDtoConverter {
         );
     }
 
-    public static InternalLeadDto toInternalLeadDto(InternalLead lead) {
+    public static InternalLeadDto toInternalLeadDto(Lead lead) {
         String name = lead.getLastName() + ", " + lead.getFirstName();
-        long creationDateTimestamp = lead.getCreationDate().getTimeInMillis();
+        String creationDate = DateUtils.toString(lead.getCreationDate());
 
         return new InternalLeadDto(
                 name,
@@ -41,15 +41,15 @@ public class LeadToInternalLeadDtoConverter {
                 lead.getPostalCode(),
                 lead.getCity(),
                 lead.getCountry(),
-                creationDateTimestamp,
+                creationDate,
                 lead.getCompany(),
                 lead.getState()
         );
     }
 
-    public static List<InternalLeadDto> toInternalLeadDtos(List<InternalLead> leads) {
+    public static List<InternalLeadDto> toInternalLeadDtos(List<Lead> leads) {
         return leads.stream()
-                .map(LeadToInternalLeadDtoConverter::toInternalLeadDto)
+                .map(TypeConverter::toInternalLeadDto)
                 .toList();
     }
 }

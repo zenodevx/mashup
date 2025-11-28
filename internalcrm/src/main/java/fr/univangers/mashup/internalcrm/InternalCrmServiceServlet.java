@@ -31,10 +31,10 @@ public class InternalCrmServiceServlet extends HttpServlet {
         processRequest(req, resp);
     }
 
-    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            resp.setContentType("application/x-thrift");
-            TTransport transport = new TIOStreamTransport(req.getInputStream(), resp.getOutputStream());
+            response.setContentType("application/x-thrift");
+            TTransport transport = new TIOStreamTransport(request.getInputStream(), response.getOutputStream());
             processor.process(inProtocolFactory.getProtocol(transport), outProtocolFactory.getProtocol(transport));
         } catch (TException e) {
             throw new RuntimeException(e);

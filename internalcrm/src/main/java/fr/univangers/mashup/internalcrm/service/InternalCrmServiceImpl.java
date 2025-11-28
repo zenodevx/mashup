@@ -1,43 +1,53 @@
 package fr.univangers.mashup.internalcrm.service;
 
-import fr.univangers.mashup.internalcrm.model.InternalLead;
-import fr.univangers.mashup.internalcrm.model.InternalLeadModel;
 import fr.univangers.mashup.internalcrm.thrift.InternalCrmService;
 import fr.univangers.mashup.internalcrm.thrift.InternalLeadDto;
+import fr.univangers.mashup.internalcrm.thrift.InvalidDateFormatException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import static fr.univangers.mashup.internalcrm.service.LeadToInternalLeadDtoConverter.toInternalLead;
-import static fr.univangers.mashup.internalcrm.service.LeadToInternalLeadDtoConverter.toInternalLeadDtos;
+import static fr.univangers.mashup.internalcrm.model.LeadModelFactory.getModel;
+import static fr.univangers.mashup.internalcrm.utils.TypeConverter.toInternalLeadDtos;
+import static fr.univangers.mashup.internalcrm.utils.TypeConverter.toLead;
 
 public class InternalCrmServiceImpl implements InternalCrmService.Iface {
-    private final InternalLeadModel leadService = new InternalLeadModel();
+    private static final String datePattern = "yyyy-MM-dd";
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
 
     @Override
     public List<InternalLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) {
-        List<InternalLead> leads = leadService.findLeads(lowAnnualRevenue, highAnnualRevenue, state);
-        return toInternalLeadDtos(leads);
+        return toInternalLeadDtos(getModel().findLeads(lowAnnualRevenue, highAnnualRevenue, state));
     }
 
     @Override
-    public List<InternalLeadDto> findLeadsByDate(long startDateTimestamp, long endDateTimestamp) {
-        Calendar startDate = Calendar.getInstance();
-        Calendar endDate = Calendar.getInstance();
-        startDate.setTimeInMillis(startDateTimestamp);
-        endDate.setTimeInMillis(endDateTimestamp);
+    public List<InternalLeadDto> findLeadsByDate(String startDate, String endDate) throws InvalidDateFormatException {
+        Calendar startDateCalendar = Calendar.getInstance();
+        try {
+            startDateCalendar.setTime(dateFormat.parse(startDate));
+        } catch (ParseException e) {
+            throw new InvalidDateFormatException(startDate, datePattern);
+        }
 
-        List<InternalLead> leads = leadService.findLeadsByDate(startDate, endDate);
-        return toInternalLeadDtos(leads);
+        Calendar endDateCalender = Calendar.getInstance();
+        try {
+            endDateCalender.setTime(dateFormat.parse(endDate));
+        } catch (ParseException e) {
+            throw new InvalidDateFormatException(endDate, datePattern);
+        }
+
+        return toInternalLeadDtos(getModel().findLeadsByDate(startDateCalendar, endDateCalender));
     }
 
     @Override
-    public void addLead(InternalLeadDto leadDto) {
-        leadService.addLead(toInternalLead(leadDto));
+    public void addLead(InternalLeadDto leadDto) throws InvalidDateFormatException {
+        getModel().addLead(toLead(leadDto));
     }
 
     @Override
-    public void deleteLead(InternalLeadDto leadDto) {
-        leadService.deleteLead(toInternalLead(leadDto));
+    public void deleteLead(InternalLeadDto leadDto) throws InvalidDateFormatException {
+        getModel().deleteLead(toLead(leadDto));
     }
 }
