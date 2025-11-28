@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51a82ac3-99ec-49e8-b398-bc9c99f8b7f7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/fr/univangers/mashup/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/fr/univangers/mashup/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/InternalCrmServiceServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/InternalCrmServiceServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/model/InternalLead.java" beforeDir="false" afterPath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/model/Lead.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/model/InternalLeadModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/model/LeadModelImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/service/InternalCrmServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/service/InternalCrmServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/service/LeadToInternalLeadDtoConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/internalcrm/src/main/java/fr/univangers/mashup/internalcrm/utils/TypeConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internalcrm/src/main/thrift/internalcrm.thrift" beforeDir="false" afterPath="$PROJECT_DIR$/internalcrm/src/main/thrift/internalcrm.thrift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,26 +122,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.mashup [:client:compileThrift].executor": "Run",
-    "Gradle.mashup [:client:run].executor": "Run",
-    "Gradle.mashup [:internalcrm:appRun].executor": "Run",
-    "Gradle.mashup [:internalcrm:compileThrift].executor": "Run",
-    "Gradle.mashup [:virtualcrm:bootRun].executor": "Run",
-    "Gradle.mashup [clean].executor": "Run",
-    "Gradle.mashup [farmRun].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "advanced.settings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.mashup [:client:compileThrift].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.mashup [:client:run].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.mashup [:internalcrm:appRun].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.mashup [:internalcrm:compileThrift].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.mashup [:virtualcrm:bootRun].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.mashup [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.mashup [farmRun].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;internalcrm&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Gradle.mashup [:client:run]">
     <configuration name="mashup [:client:compileThrift]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
