@@ -3,8 +3,10 @@ package fr.univangers.mashup.internalcrm.model;
 import java.util.Calendar;
 import java.util.Objects;
 
+import static java.text.MessageFormat.format;
+
 @SuppressWarnings("unused")
-public class InternalLead {
+public class Lead {
     private String firstName;
     private String lastName;
     private double annualRevenue;
@@ -17,10 +19,10 @@ public class InternalLead {
     private String company;
     private String state;
 
-    public InternalLead() {
+    public Lead() {
     }
 
-    public InternalLead(String firstName, String lastName, double annualRevenue, String phone, String street, String postalCode, String city, String country, Calendar creationDate, String company, String state) {
+    public Lead(String firstName, String lastName, double annualRevenue, String phone, String street, String postalCode, String city, String country, Calendar creationDate, String company, String state) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.annualRevenue = annualRevenue;
@@ -125,7 +127,7 @@ public class InternalLead {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        InternalLead that = (InternalLead) o;
+        Lead that = (Lead) o;
         return Double.compare(annualRevenue, that.annualRevenue) == 0 && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(phone, that.phone) && Objects.equals(street, that.street) && Objects.equals(postalCode, that.postalCode) && Objects.equals(city, that.city) && Objects.equals(country, that.country) && Objects.equals(creationDate, that.creationDate) && Objects.equals(company, that.company) && Objects.equals(state, that.state);
     }
 
@@ -136,18 +138,6 @@ public class InternalLead {
 
     @Override
     public String toString() {
-        return "InternalLead{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", annualRevenue=" + annualRevenue +
-                ", phone='" + phone + '\'' +
-                ", street='" + street + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", creationDate=" + creationDate +
-                ", company='" + company + '\'' +
-                ", state='" + state + '\'' +
-                '}';
+        return format("{0}(firstName=''{1}'', lastName=''{2}'', annualRevenue={3}, phone=''{4}'', street=''{5}'', postalCode=''{6}'', city=''{7}'', country=''{8}'', creationDate={9}, company=''{10}'', state=''{11}'')", getClass().getSimpleName(), firstName, lastName, annualRevenue, phone, street, postalCode, city, country, creationDate, company, state);
     }
 }
