@@ -1,34 +1,16 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.linecorp.thrift-gradle-plugin' version '0.6.1'
+    id 'com.gradleup.shadow' version '9.3.0'
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.apache.thrift/libthrift
-    implementation 'org.apache.thrift:libthrift:0.22.0'
-    // https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
-    implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-reload4j
-    implementation 'org.slf4j:slf4j-reload4j:2.0.17'
-}
-
-final String THRIFT_GENERATED_DIR = "$projectDir/generated"
-
-compileThrift {
-    sourceItems "${project(':internalcrm').projectDir}/src/main/thrift"
-    outputDir "$THRIFT_GENERATED_DIR/java"
-    createGenFolder false
-    strict true
-    verbose true
-    recurse true
-    generator 'java', 'private_members', 'fullcamel', 'jakarta_annotations'
-}
-
-sourceSets.main.java.srcDirs += [compileThrift.outputDir]
-
-tasks.named('clean') {
-    delete file(THRIFT_GENERATED_DIR)
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5-fluent
+    implementation 'org.apache.httpcomponents.client5:httpclient5-fluent:5.6'
+    // https://mvnrepository.com/artifact/tools.jackson.core/jackson-databind
+    implementation 'tools.jackson.core:jackson-databind:3.0.3'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.17'
 }
 
 application {
