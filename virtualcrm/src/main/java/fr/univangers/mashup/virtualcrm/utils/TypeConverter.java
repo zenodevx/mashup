@@ -10,8 +10,8 @@ import java.util.List;
 public class TypeConverter {
     public static VirtualLeadDto toVirtualLeadDto(InternalLeadDto lead) {
         String[] names = lead.getName().split(", ");
-        String firstName = names[0];
-        String lastName = names[1];
+        String lastName = names[0];
+        String firstName = names[1];
         Calendar creationDate = null;
         try {
             creationDate = DateUtils.parse(lead.getCreationDate());

@@ -22,6 +22,14 @@ public class NominatimClient implements GeoLocalisationServiceClient {
 
     @Override
     public GeographicPointDto getGeographicPointFromLead(VirtualLeadDto lead) {
+        if (lead.getCity() == null || lead.getCity().isBlank() ||
+                lead.getCountry() == null || lead.getCountry().isBlank() ||
+                lead.getPostalCode() == null || lead.getPostalCode().isBlank() ||
+                lead.getStreet() == null || lead.getStreet().isBlank()) {
+            logger.log(INFO, "Skipping lead {0} {1}: Missing required address fields.", lead.getFirstName(), lead.getLastName());
+            return null;
+        }
+
         logger.log(INFO, "Fetching coordinates for: {0}, {1}", lead.getStreet(), lead.getCity());
 
         try {

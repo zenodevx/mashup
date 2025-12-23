@@ -10,8 +10,8 @@ import java.util.List;
 public class TypeConverter {
     public static Lead toLead(InternalLeadDto leadDto) throws InvalidDateFormatException {
         String[] split = leadDto.getName().split(", ");
-        String firstName = split[1];
         String lastName = split[0];
+        String firstName = split[1];
         Calendar creationDate = DateUtils.parse(leadDto.getCreationDate());
 
         return new Lead(

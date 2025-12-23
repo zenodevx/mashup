@@ -58,4 +58,30 @@ public class InternalCrmThriftClient implements InternalCrmClient {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void addLead(InternalLeadDto leadDto) {
+        logger.log(INFO, "Attempting to add lead: {0}", leadDto.getName());
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
+            transport.open();
+            client.addLead(leadDto);
+            logger.log(INFO, "Successfully added lead: {0}", leadDto.getName());
+        } catch (TException e) {
+            logger.log(ERROR, "Failed to add lead: {0}. Reason: {1}", leadDto.getName(), e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteLead(InternalLeadDto leadDto) {
+        logger.log(INFO, "Attempting to delete lead: {0}", leadDto.getName());
+        try (TTransport transport = client.getInputProtocol().getTransport()) {
+            transport.open();
+            client.deleteLead(leadDto);
+            logger.log(INFO, "Successfully deleted lead: {0}", leadDto.getName());
+        } catch (TException e) {
+            logger.log(ERROR, "Failed to delete lead: {0}. Reason: {1}", leadDto.getName(), e.getMessage());
+            throw new RuntimeException("Error while calling Thrift deleteLead", e);
+        }
+    }
 }
