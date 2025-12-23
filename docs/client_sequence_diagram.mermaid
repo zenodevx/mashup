@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant Client
+    participant VirtualCRM as VirtualCrmSpringService
+    participant SFClient as SalesForceCrmClient
+    participant IntClient as InternalCrmThriftClient
+    participant GeoService as GeoLocalisationServiceClient
+
+    Client->>+VirtualCRM: GET /leads?low=x&high=y&state=z
+    
+    Note right of VirtualCRM: Récupération Leads Salesforce
+    VirtualCRM->>+SFClient: findLeads(x, y, z)
+    SFClient-->>-VirtualCRM: List<VirtualLeadDto>
+
+    Note right of VirtualCRM: Récupération Leads Internes
+    VirtualCRM->>+IntClient: findLeads(x, y, z)
+    IntClient-->>-VirtualCRM: List<VirtualLeadDto>
+
+    Note right of VirtualCRM: Agrégation et Géolocalisation
+    loop Pour chaque Lead
+        VirtualCRM->>+GeoService: getGeographicPointFromLead(lead)
+        GeoService-->>-VirtualCRM: GeographicPointDto
+    end
+
+    VirtualCRM-->>-Client: List<VirtualLeadDto> (JSON)
+

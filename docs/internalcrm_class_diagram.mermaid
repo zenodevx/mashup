@@ -1,0 +1,41 @@
+classDiagram
+    namespace thrift_generated {
+        class InternalLeadDto {
+            +String name
+            +double annualRevenue
+            +String phone
+            +String street
+            +String city
+            +String country
+            +String creationDate
+            +String state
+        }
+        class InternalCrmServiceIface {
+            <<interface>>
+            +findLeads()
+            +addLead()
+        }
+    }
+
+    namespace model {
+        class Lead {
+            -String firstName
+            -String lastName
+            -double annualRevenue
+            -Calendar creationDate
+        }
+        class LeaModel {
+            <<interface>>
+        }
+        class LeadModelImpl
+    }
+
+    namespace service {
+        class InternalCrmServiceImpl
+    }
+
+    InternalCrmServiceImpl ..|> InternalCrmServiceIface
+    InternalCrmServiceImpl --> LeaModel
+    LeadModelImpl ..|> LeaModel
+    LeadModelImpl --> Lead : manage
+    InternalCrmServiceImpl --> InternalLeadDto

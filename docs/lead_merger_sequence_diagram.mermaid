@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant Tool as LeadMerger
+    participant SFClient as SalesForceCrmClient
+    participant IntClient as InternalCrmThriftClient
+    participant InternalSvc as InternalCrmService
+
+    activate Tool
+    
+    Tool->>+SFClient: retrieveAllLeads()
+    SFClient-->>-Tool: List<VirtualLeadDto>
+    
+    loop Pour chaque Lead récupéré
+        Tool->>Tool: Conversion VirtualLeadDto -> InternalLeadDto
+        Tool->>+IntClient: addLead(internalLeadDto)
+        IntClient->>+InternalSvc: addLead(RPC Call)
+        InternalSvc-->>-IntClient: void
+        IntClient-->>-Tool: void
+    end
+    
+    deactivate Tool

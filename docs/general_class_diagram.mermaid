@@ -1,0 +1,48 @@
+classDiagram
+    class VirtualCrmService {
+        <<interface>>
+    }
+    class VirtualCrmSpringService {
+    }
+    
+    class CrmClient {
+        <<interface>>
+    }
+    
+    class InternalCrmClient {
+        <<interface>>
+    }
+    
+    class SalesForceCrmClient {
+    }
+    
+    class InternalCrmThriftClient {
+    }
+    
+    class GeoLocalisationServiceClient {
+        <<interface>>
+    }
+    
+    class NominatimClient {
+    }
+    
+    class InternalCrmClientFactory {
+    }
+    
+    class GeoLocalisationServiceClientFactory {
+    }
+
+    VirtualCrmService <|.. VirtualCrmSpringService
+    VirtualCrmSpringService ..> CrmClient
+    VirtualCrmSpringService ..> GeoLocalisationServiceClient
+    VirtualCrmSpringService ..> InternalCrmClientFactory
+    VirtualCrmSpringService ..> GeoLocalisationServiceClientFactory
+
+    CrmClient <|-- InternalCrmClient
+    CrmClient <|.. SalesForceCrmClient
+    InternalCrmClient <|.. InternalCrmThriftClient
+    
+    InternalCrmClientFactory ..> InternalCrmClient
+    
+    GeoLocalisationServiceClient <|.. NominatimClient
+    GeoLocalisationServiceClientFactory ..> GeoLocalisationServiceClient
