@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 import static java.text.MessageFormat.format;
+import static java.util.Locale.US;
 
 public class Client {
     private static final String CRM_SERVICE_ENDPOINT_ADDRESS = "http://localhost:8080/virtualcrm/";
@@ -102,14 +103,19 @@ public class Client {
             return;
         }
 
-        String rowFormat = "| %-12s | %-12s | %-20s | %-10s | %-14s | %-15s | %-8s | %-12s | %-8s | %-10s | %-10s |%n";
-        String separator = "+--------------+--------------+----------------------+------------+----------------+-----------------+----------+--------------+----------+------------+------------+";
+        String rowFormat = "| %-12s | %-12s | %-20s | %-10s | %-14s | %-15s | %-8s | %-12s | %-8s | %-10s | %-10s | %-12s |%n";
+        String separator = "+--------------+--------------+----------------------+------------+----------------+-----------------+----------+--------------+----------+------------+------------+--------------+";
 
         System.out.println(separator);
-        System.out.printf(rowFormat, "First Name", "Last Name", "Company", "Revenue", "Phone", "Street", "P.Code", "City", "Country", "State", "Created");
+        System.out.printf(rowFormat, "First Name", "Last Name", "Company", "Revenue", "Phone", "Street", "P.Code", "City", "Country", "State", "Created", "GeoPoint");
         System.out.println(separator);
 
         for (JsonNode lead : root) {
+            JsonNode geo = lead.get("geographicPoint");
+            String geoStr = (geo == null || geo.isNull())
+                    ? "N/A"
+                    : String.format(US, "%.1f,%.1f", geo.get("latitude").asDouble(), geo.get("longitude").asDouble());
+
             System.out.printf(rowFormat,
                     truncate(getString(lead, "firstName"), 12),
                     truncate(getString(lead, "lastName"), 12),
@@ -121,7 +127,8 @@ public class Client {
                     truncate(getString(lead, "city"), 12),
                     truncate(getString(lead, "country"), 8),
                     truncate(getString(lead, "state"), 10),
-                    truncate(getString(lead, "creationDate").substring(0, 10), 10)
+                    truncate(getString(lead, "creationDate").substring(0, 10), 10),
+                    truncate(geoStr, 12)
             );
         }
         System.out.println(separator);
