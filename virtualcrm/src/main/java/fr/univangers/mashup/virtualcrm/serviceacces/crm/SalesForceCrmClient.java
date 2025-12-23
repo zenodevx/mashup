@@ -23,7 +23,7 @@ import static fr.univangers.mashup.virtualcrm.utils.DateUtils.formatSfDateToApp;
 import static java.lang.System.Logger.Level.*;
 import static java.text.MessageFormat.format;
 
-public class SalesForceCrmClient {
+public class SalesForceCrmClient implements CrmClient {
     private static final System.Logger logger = System.getLogger(SalesForceCrmClient.class.getSimpleName());
     private static final String SALESFORCE_PROPERTIES = "salesforce.properties";
     private static final Properties properties = new Properties();
@@ -97,6 +97,7 @@ public class SalesForceCrmClient {
         }
     }
 
+    @Override
     public List<VirtualLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) {
         logger.log(INFO, "Querying Salesforce leads by revenue: {0} - {1} in state: {2}", lowAnnualRevenue, highAnnualRevenue, state);
 
@@ -116,6 +117,7 @@ public class SalesForceCrmClient {
                 """, low, high, state));
     }
 
+    @Override
     public List<VirtualLeadDto> findLeadsByDate(String startDate, String endDate) {
         try {
             logger.log(INFO, "Querying Salesforce leads by date: {0} to {1}", startDate, endDate);
