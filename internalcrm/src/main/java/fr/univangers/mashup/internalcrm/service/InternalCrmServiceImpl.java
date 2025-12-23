@@ -51,14 +51,14 @@ public class InternalCrmServiceImpl implements InternalCrmService.Iface {
 
     @Override
     public void addLead(InternalLeadDto leadDto) throws InvalidDateFormatException {
-        logger.log(INFO, "Adding new lead: {}", leadDto.getName());
+        logger.log(INFO, "Adding new lead: {0}", leadDto.getName());
         getModel().addLead(toLead(leadDto));
         logger.log(DEBUG, "Lead successfully added");
     }
 
     @Override
     public void deleteLead(InternalLeadDto leadDto) throws InvalidDateFormatException, LeadNotFoundException {
-        logger.log(INFO, "Attempting to delete lead: {}", leadDto.getName());
+        logger.log(INFO, "Attempting to delete lead: {0}", leadDto.getName());
         if (!getModel().deleteLead(toLead(leadDto))) {
             logger.log(WARNING, "Delete failed: lead not found");
             throw new LeadNotFoundException(leadDto);
