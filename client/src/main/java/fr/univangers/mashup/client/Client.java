@@ -63,8 +63,8 @@ public class Client {
         System.out.println("  findLeads lowRev highRev state");
         System.out.println("  findLeadsByDate startDate endDate");
         System.out.println("Examples:");
-        System.out.println("  java -jar client-all.jar findLeads 74000 76000 Île-de-France");
-        System.out.println("  java -jar client-all.jar findLeadsByDate 2025-02-18 2025-02-22");
+        System.out.println("  java -jar client-all.jar findLeads 300000000.0 400000000.0 NC");
+        System.out.println("  java -jar client-all.jar findLeadsByDate 2025-10-01 2025-10-05");
     }
 
     private static void findLeads(String lowRev, String highRev, String state) throws IOException, ParseException {
@@ -93,7 +93,7 @@ public class Client {
         }
     }
 
-    private static void displayTable(byte[] jsonContent) throws IOException {
+    private static void displayTable(byte[] jsonContent) {
         System.out.println();
 
         JsonNode root = objectMapper.readTree(jsonContent);
@@ -102,20 +102,26 @@ public class Client {
             return;
         }
 
-        String rowFormat = "| %-15s | %-15s | %-20s | %-10s | %-12s |%n";
-        String separator = "+-----------------+-----------------+----------------------+------------+--------------+";
+        String rowFormat = "| %-12s | %-12s | %-20s | %-10s | %-14s | %-15s | %-8s | %-12s | %-8s | %-10s | %-10s |%n";
+        String separator = "+--------------+--------------+----------------------+------------+----------------+-----------------+----------+--------------+----------+------------+------------+";
 
         System.out.println(separator);
-        System.out.printf(rowFormat, "First Name", "Last Name", "Company", "Revenue", "City");
+        System.out.printf(rowFormat, "First Name", "Last Name", "Company", "Revenue", "Phone", "Street", "P.Code", "City", "Country", "State", "Created");
         System.out.println(separator);
 
         for (JsonNode lead : root) {
             System.out.printf(rowFormat,
-                    truncate(getString(lead, "firstName"), 15),
-                    truncate(getString(lead, "lastName"), 15),
+                    truncate(getString(lead, "firstName"), 12),
+                    truncate(getString(lead, "lastName"), 12),
                     truncate(getString(lead, "company"), 20),
                     String.format("%.0f", lead.get("annualRevenue").asDouble()),
-                    truncate(getString(lead, "city"), 12)
+                    truncate(getString(lead, "phone"), 14),
+                    truncate(getString(lead, "street"), 15),
+                    truncate(getString(lead, "postalCode"), 8),
+                    truncate(getString(lead, "city"), 12),
+                    truncate(getString(lead, "country"), 8),
+                    truncate(getString(lead, "state"), 10),
+                    truncate(getString(lead, "creationDate").substring(0, 10), 10)
             );
         }
         System.out.println(separator);

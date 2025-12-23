@@ -1,6 +1,5 @@
 package fr.univangers.mashup.internalcrm.model;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class LeadModelFactory {
@@ -8,11 +7,12 @@ public class LeadModelFactory {
 
     static {
         model = new LeadModelImpl();
-        model.addLead(new Lead("Alice", "Martin", 75000, "01 23 45 67 89", "123 Rue du Faubourg", "75001", "Paris", "France", new GregorianCalendar(2025, Calendar.JANUARY, 15), "Innovations Tech", "Île-de-France"));
-        model.addLead(new Lead("Bob", "Dupont", 120000, "02 34 56 78 90", "456 Avenue des Champs", "69001", "Lyon", "France", new GregorianCalendar(2025, Calendar.FEBRUARY, 20), "Solutions Créatives", "Auvergne-Rhône-Alpes"));
-        model.addLead(new Lead("Charlie", "Durand", 50000, "03 45 67 89 01", "789 Boulevard de la Liberté", "13001", "Marseille", "France", new GregorianCalendar(2025, Calendar.MARCH, 10), "Technologies Futures", "Provence-Alpes-Côte d'Azur"));
-        model.addLead(new Lead("David", "Moreau", 95000, "04 56 78 90 12", "234 Place Bellecour", "31000", "Toulouse", "France", new GregorianCalendar(2025, Calendar.APRIL, 25), "Entreprise Commerciale", "Occitanie"));
-        model.addLead(new Lead("Eve", "Leroy", 300000, "05 67 89 01 23", "567 Rue de la République", "59000", "Lille", "France", new GregorianCalendar(2025, Calendar.MAY, 30), "Experts Financiers", "Hauts-de-France"));
+        model.addLead(new Lead("Bertha", "Boxer", 900750000.0, "(850) 644-4200", "321 Westcott Building", "32306", "Tallahassee", "USA", new GregorianCalendar(2025, 9, 1, 9, 22, 27), "Farmers Coop. of Florida", "FL"));
+        model.addLead(new Lead("Jeff", "Glimpse", 1250000.0, "886-2-25474189", "No. 1, Section 4, Roosevelt Rd", "10617", "Taipei", "Taiwan", new GregorianCalendar(2025, 4, 2, 9, 22, 27), "Jackson Controls", "Taipei City"));
+        model.addLead(new Lead("Pat", "Stumuller", 5400000.0, "33562156600", "12 Avenue de l'Opéra", "75001", "Paris", "France", new GregorianCalendar(2025, 2, 2, 9, 22, 27), "Pyramid Construction Inc.", "Ile-de-France"));
+        model.addLead(new Lead("David", "Monaco", 8900000.0, "(033) 452-1299", "1-6-1 Roppongi, Minato-ku", "106-6001", "Tokyo", "Japan", new GregorianCalendar(2025, 9, 3, 9, 22, 27), "Blues Entertainment Corp.", "Tokyo"));
+        model.addLead(new Lead("Jack", "Rogers", 350000000.0, "(336) 222-7000", "525 S. Lexington Ave", "27215", "Burlington", "USA", new GregorianCalendar(2025, 8, 2, 9, 22, 27), "Burlington Textiles Corp of America", "NC"));
+        model.addLead(new Lead("Shelly", "Brownell", 15000000.0, "(408) 326-9000", "101 Lucas Valley Rd", "94903", "San Rafael", "USA", new GregorianCalendar(2025, 1, 7, 9, 22, 27), "Western Telecommunications Corp.", "CA"));
     }
 
     private LeadModelFactory() {
