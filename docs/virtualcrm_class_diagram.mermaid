@@ -1,0 +1,75 @@
+classDiagram
+    namespace dto {
+        class VirtualLeadDto {
+            +String firstName
+            +String lastName
+            +double annualRevenue
+            +GeographicPointDto geographicPoint
+            +String state
+        }
+        class GeographicPointDto {
+            +double latitude
+            +double longitude
+        }
+    }
+
+    namespace service {
+        class VirtualCrmSpringService {
+            -List~CrmClient~ crmClients
+            -GeoLocalisationServiceClient localisationService
+        }
+    }
+
+    namespace service_access {
+        class CrmClient {
+            <<interface>>
+            +findLeads()
+            +findLeadsByDate()
+        }
+        
+        class InternalCrmClient {
+            <<interface>>
+            +addLead()
+            +deleteLead()
+        }
+
+        class SalesForceCrmClient {
+            +loginToSalesforce()
+        }
+
+        class InternalCrmThriftClient {
+        }
+        
+        class InternalCrmClientFactory {
+            +getInternalCrmClient()
+        }
+
+        class GeoLocalisationServiceClient {
+            <<interface>>
+            +getGeographicPointFromLead()
+        }
+
+        class NominatimClient {
+        }
+
+        class GeoLocalisationServiceClientFactory {
+            +getGeoLocalisationServiceClient()
+        }
+    }
+
+    VirtualCrmSpringService --> CrmClient : uses (List)
+    VirtualCrmSpringService --> GeoLocalisationServiceClient : uses
+    VirtualCrmSpringService ..> InternalCrmClientFactory : uses
+    VirtualCrmSpringService ..> GeoLocalisationServiceClientFactory : uses
+
+    InternalCrmClient --|> CrmClient
+    SalesForceCrmClient ..|> CrmClient
+    InternalCrmThriftClient ..|> InternalCrmClient
+    NominatimClient ..|> GeoLocalisationServiceClient
+
+    InternalCrmClientFactory ..> InternalCrmClient : creates
+    GeoLocalisationServiceClientFactory ..> GeoLocalisationServiceClient : creates
+
+    VirtualCrmSpringService --> VirtualLeadDto : returns
+    VirtualLeadDto --> GeographicPointDto : contains
+
